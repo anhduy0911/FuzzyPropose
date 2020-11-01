@@ -44,6 +44,10 @@ run_range = int(sys.argv[4])
 learning_rate = float(sys.argv[5])
 scale_factor = float(sys.argv[6])
 read_name = "data/" + read_file + ".csv"
+try:
+    max_time = sys.argv[7]
+except:
+    max_time = None
 df = pd.read_csv(read_name)
 for index in range(data_range):
     write_name = "log/" + write_file + str(index) + ".csv"
@@ -73,7 +77,7 @@ for index in range(data_range):
         inma = Inma()
         gsa = GSA()
         file_name = "log/q_learning_" + str(index) + ".csv"
-        temp = net.simulate(optimizer=q_learning, file_name=file_name)
+        temp = net.simulate(optimizer=q_learning, file_name=file_name, max_time=max_time)
         life_time.append(temp)
         result.writerow({"nb run": nb_run, "lifetime": temp})
 

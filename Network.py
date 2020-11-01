@@ -84,7 +84,7 @@ class Network:
         writer = csv.DictWriter(energy_log, fieldnames=["time", "mc energy", "min energy"])
         writer.writeheader()
         t = 0
-        while self.node[self.find_min_node()].energy >= 0:
+        while self.node[self.find_min_node()].energy >= 0 and t <= 2 * 10**6:
             t = t + 1
             if (t - 1) % 1000 == 0:
                 print(t, self.mc.current, self.node[self.find_min_node()].energy)
@@ -95,7 +95,7 @@ class Network:
         writer.writerow({"time": t, "mc energy": self.mc.energy, "min energy": self.node[self.find_min_node()].energy})
         energy_log.close()
 
-    def simulate_max_time(self, optimizer=None, max_time=10000, file_name="log/information_log.csv"):
+    def simulate_max_time(self, optimizer=None, max_time=10**6, file_name="log/information_log.csv"):
         """
         simulate process finish when current time is more than the max_time
         :param optimizer:
