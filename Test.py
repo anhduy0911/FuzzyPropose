@@ -50,12 +50,14 @@ except:
     max_time = None
 df = pd.read_csv(read_name)
 for index in range(data_range):
+    print("nb data = ", index)
     write_name = "log/" + write_file + str(index) + ".csv"
     open_file = open(write_name, "w")
     result = csv.DictWriter(open_file, fieldnames=["nb run", "lifetime"])
     result.writeheader()
     life_time = []
     for nb_run in range(run_range):
+        print("nb run = ", nb_run)
         random.seed(nb_run)
         node_pos = list(literal_eval(df.node_pos[index]))
         list_node = []
@@ -80,8 +82,11 @@ for index in range(data_range):
         temp = net.simulate(optimizer=q_learning, file_name=file_name, max_time=max_time)
         life_time.append(temp)
         result.writerow({"nb run": nb_run, "lifetime": temp})
+        print("done run = ", nb_run)
 
     confidence = 0.95
     h = sem(life_time) * t.ppf((1 + confidence) / 2, len(life_time) - 1)
     result.writerow({"nb run": np.mean(life_time), "lifetime": h})
     open_file.close()
+    print("done data = ", index)
+print("done all")
