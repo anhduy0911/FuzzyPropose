@@ -114,18 +114,18 @@ def get_output(avg, std, pe):
     return output
 
 
-f = open("log/energy_info.csv", "r")
-g = open("log/fuzzy_number.csv", "w")
-reader = csv.DictReader(f)
-writer = csv.DictWriter(g, fieldnames=["avg", "len", "p/e", "output"])
-for row in reader:
-    print(row)
-    if row["min E"] == "":
-        continue
-    avg = float(row["min E"])
-    std = float(row["len E"])
-    pe = float(row["p/e"])
-    output1 = get_output(avg, std, pe)
-    writer.writerow({"avg": min_E(avg), "len": len_E(std), "p/e": p_e(pe), "output": output1})
-f.close()
-g.close()
+# f = open("log/energy_info.csv", "r")
+# g = open("log/fuzzy_number.csv", "w")
+# reader = csv.DictReader(f)
+# writer = csv.DictWriter(g, fieldnames=["avg", "len", "p/e", "output"])
+# for row in reader:
+#     print(row)
+#     if row["min E"] == "":
+#         continue
+#     avg = float(row["min E"])
+#     std = float(row["len E"])
+#     pe = float(row["p/e"])
+#     output1 = get_output(avg, std, pe)
+#     writer.writerow({"avg": min_E(avg), "len": len_E(std), "p/e": p_e(pe), "output": output1})
+# f.close()
+# g.close()
