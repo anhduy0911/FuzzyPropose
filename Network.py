@@ -94,6 +94,7 @@ class Network:
             #         {"time": t, "mc energy": self.mc.energy, "min energy": self.node[self.find_min_node()].energy})
         writer.writerow({"time": t, "mc energy": self.mc.energy, "min energy": self.node[self.find_min_node()].energy})
         energy_log.close()
+        return t
 
     def simulate_max_time(self, optimizer=None, max_time=10**6, file_name="log/information_log.csv"):
         """
@@ -121,6 +122,7 @@ class Network:
                 nb_package = current_package
                 writer.writerow({"time": t, "nb dead": nb_dead, "nb package": nb_package})
         information_log.close()
+        return t
 
     def simulate(self, optimizer=None, max_time=None, file_name="log/energy_log.csv"):
         """
