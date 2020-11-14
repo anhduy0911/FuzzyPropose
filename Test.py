@@ -45,7 +45,7 @@ learning_rate = float(sys.argv[5])
 scale_factor = float(sys.argv[6])
 read_name = "data/" + read_file + ".csv"
 try:
-    max_time = sys.argv[7]
+    max_time = int(sys.argv[7])
 except:
     max_time = None
 df = pd.read_csv(read_name)
