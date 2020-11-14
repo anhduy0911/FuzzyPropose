@@ -33,7 +33,13 @@ def reward_function(network, q_learning, state, receive_func=find_receiver):
     index_negative = [index for index, node in enumerate(network.node) if p[index] < node.avg_energy]
     E = np.asarray([network.node[index].energy for index in index_negative])
     pe = np.asarray([p[index] / network.node[index].avg_energy for index in index_negative])
-    alpha = Fuzzy.get_output(min(E), len(index_negative), min(pe))
+    if len(index_negative):
+        min_E = min(E)
+        min_pe = min(pe)
+    else:
+        min_E = min([node.energy for node in network.node])
+        min_pe = 1.0
+    alpha = Fuzzy.get_output(min_E, len(index_negative), min_pe)
 
     charging_time = get_charging_time(network, q_learning, state, alpha)
     w, nb_target_alive = get_weight(network, network.mc, q_learning, state, charging_time, receive_func)

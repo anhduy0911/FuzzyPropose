@@ -133,7 +133,7 @@ class Network:
         :return:
         """
         if max_time:
-            t = self.simulate_max_time(optimizer=optimizer, max_time=max_time, file_name=file_name)
+            t = self.simulate_max_time(optimizer=optimizer, max_time=max_time)
         else:
             t = self.simulate_lifetime(optimizer=optimizer, file_name=file_name)
         return t
