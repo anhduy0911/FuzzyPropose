@@ -40,16 +40,18 @@ import sys
 read_file = sys.argv[1]
 write_file = sys.argv[2]
 data_range = int(sys.argv[3])
-run_range = int(sys.argv[4])
-learning_rate = float(sys.argv[5])
-scale_factor = float(sys.argv[6])
+data_start = int(sys.argv[4])
+run_range = int(sys.argv[5])
+learning_rate = float(sys.argv[6])
+scale_factor = float(sys.argv[7])
 read_name = "data/" + read_file + ".csv"
 try:
-    max_time = int(sys.argv[7])
+    max_time = int(sys.argv[8])
 except:
     max_time = None
 df = pd.read_csv(read_name)
-for index in range(data_range):
+for id_data in range(data_range):
+    index = id_data + data_start
     print("nb data = ", index)
     write_name = "log/" + write_file + str(index) + ".csv"
     open_file = open(write_name, "w")
