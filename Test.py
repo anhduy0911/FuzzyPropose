@@ -49,6 +49,10 @@ try:
     max_time = int(sys.argv[8])
 except:
     max_time = None
+try:
+    opt = sys.argv[9]
+except:
+    opt = "qlearning"
 df = pd.read_csv(read_name)
 for id_data in range(data_range):
     index = id_data + data_start
@@ -80,8 +84,14 @@ for id_data in range(data_range):
         q_learning = Q_learning(alpha=learning_rate, gamma=scale_factor)
         inma = Inma()
         gsa = GSA()
+        if opt == "qlearnning":
+            optimizer = q_learning
+        elif opt == "inma":
+            optimizer = inma
+        elif opt == "gsa":
+            optimizer == gsa
         file_name = "log/q_learning_" + str(index) + ".csv"
-        temp = net.simulate(optimizer=q_learning, file_name=file_name, max_time=max_time)
+        temp = net.simulate(optimizer=optimizer, file_name=file_name, max_time=max_time)
         life_time.append(temp)
         result.writerow({"nb run": nb_run, "lifetime": temp})
         print("done run = ", nb_run)
