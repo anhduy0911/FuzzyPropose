@@ -89,7 +89,7 @@ for id_data in range(data_range):
         elif opt == "inma":
             optimizer = inma
         elif opt == "gsa":
-            optimizer == gsa
+            optimizer = gsa
         file_name = "log/q_learning_" + str(index) + ".csv"
         temp = net.simulate(optimizer=optimizer, file_name=file_name, max_time=max_time)
         life_time.append(temp)
