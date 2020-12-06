@@ -84,7 +84,7 @@ for id_data in range(data_range):
         q_learning = Q_learning(alpha=learning_rate, gamma=scale_factor)
         inma = Inma()
         gsa = GSA()
-        if opt == "qlearnning":
+        if opt == "qlearning":
             optimizer = q_learning
         elif opt == "inma":
             optimizer = inma
