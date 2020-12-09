@@ -32,6 +32,6 @@ def charging(mc, net, node):
     :return:
     """
     for nd in net.node:
-        if distance.euclidean(nd.location, mc.current) < 1:
+        # if distance.euclidean(nd.location, mc.current) < 1:
             p = nd.charge(mc)
             mc.energy -= p

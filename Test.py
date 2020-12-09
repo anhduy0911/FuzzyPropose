@@ -46,13 +46,13 @@ learning_rate = float(sys.argv[6])
 scale_factor = float(sys.argv[7])
 read_name = "data/" + read_file + ".csv"
 try:
-    max_time = int(sys.argv[8])
-except:
-    max_time = None
-try:
-    opt = sys.argv[9]
+    opt = sys.argv[8]
 except:
     opt = "qlearning"
+try:
+    max_time = int(sys.argv[9])
+except:
+    max_time = None
 df = pd.read_csv(read_name)
 for id_data in range(data_range):
     index = id_data + data_start
@@ -90,6 +90,8 @@ for id_data in range(data_range):
             optimizer = inma
         elif opt == "gsa":
             optimizer = gsa
+        elif opt == "none":
+            optimizer = None
         file_name = "log/q_learning_" + str(index) + ".csv"
         temp = net.simulate(optimizer=optimizer, file_name=file_name, max_time=max_time)
         life_time.append(temp)
