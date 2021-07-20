@@ -96,7 +96,7 @@ class Network:
         energy_log.close()
         return t
 
-    def simulate_max_time(self, optimizer=None, max_time=10**6, file_name="log/information_log.csv"):
+    def simulate_max_time(self, optimizer=None, max_time=10**6, write_file=None):
         """
         simulate process finish when current time is more than the max_time
         :param optimizer:
@@ -104,6 +104,7 @@ class Network:
         :param file_name:
         :return:
         """
+        file_name = f'log/{write_file}_info_log.csv'
         information_log = open(file_name, "w")
         writer = csv.DictWriter(information_log, fieldnames=["time", "nb dead", "nb package"])
         writer.writeheader()
@@ -112,7 +113,7 @@ class Network:
         t = 0
         while t <= max_time and nb_package > 0:
             t += 1
-            if (t-1) % 1000 == 0:
+            if (t - 1) % 1000 == 0:
                 print(t, self.mc.current, self.node[self.find_min_node()].energy)
             state = self.run_per_second(t, optimizer)
             current_dead = self.count_dead_node()
@@ -124,7 +125,7 @@ class Network:
         information_log.close()
         return t
 
-    def simulate(self, optimizer=None, max_time=None, file_name="log/energy_log.csv"):
+    def simulate(self, optimizer=None, max_time=None, file_name="log/energy_log.csv", write_file=None):
         """
         simulate in general. if max_time is not none, simulate_max_time will be called
         :param optimizer:
@@ -133,7 +134,7 @@ class Network:
         :return:
         """
         if max_time:
-            t = self.simulate_max_time(optimizer=optimizer, max_time=max_time)
+            t = self.simulate_max_time(optimizer=optimizer, max_time=max_time, write_file=write_file)
         else:
             t = self.simulate_lifetime(optimizer=optimizer, file_name=file_name)
         return t

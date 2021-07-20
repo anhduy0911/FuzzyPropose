@@ -33,7 +33,7 @@ class Q_learning:
             return self.action_list[self.state], 0.0
         self.set_reward(reward_func=reward_func, network=network)
         self.q_table[self.state] = (1 - self.alpha) * self.q_table[self.state] + self.alpha * (
-                self.reward + self.gamma * self.q_max(q_max_func))
+            self.reward + self.gamma * self.q_max(q_max_func))
         self.choose_next_state(network)
         if self.state == len(self.action_list) - 1:
             charging_time = (network.mc.capacity - network.mc.energy) / network.mc.e_self_charge
@@ -93,7 +93,7 @@ class Q_learning:
         :return:
         """
         # next_state = np.argmax(self.q_table[self.state])
-        if network.mc.energy < 10:
+        if network.mc.energy < 0.1:
             self.state = len(self.q_table) - 1
         else:
             self.state = np.argmax(self.q_table[self.state])

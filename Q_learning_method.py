@@ -71,7 +71,7 @@ def action_function(nb_action=81):
     list_action = []
     for i in range(int(math.sqrt(nb_action))):
         for j in range(int(math.sqrt(nb_action))):
-            list_action.append((100 * (i + 1), 100 * (j + 1)))
+            list_action.append((200 * (i + 1), 200 * (j + 1)))
     list_action.append(para.depot)
     return list_action
 
@@ -103,7 +103,7 @@ def get_weight(net, mc, q_learning, action_id, charging_time, receive_func=find_
     w = [0 for _ in mc.list_request]
     for request_id, request in enumerate(mc.list_request):
         temp = (net.node[request["id"]].energy - time_move * request["avg_energy"]) + (
-                p[request_id] - request["avg_energy"]) * charging_time
+            p[request_id] - request["avg_energy"]) * charging_time
         if temp < 0:
             list_dead.append(request["id"])
     for request_id, request in enumerate(mc.list_request):
@@ -242,10 +242,10 @@ def get_charging_time(network=None, q_learning=None, state=None, alpha=0):
 
     for index, p in s1:
         t.append((energy_min - network.node[index].energy + time_move * network.node[index].avg_energy) / (
-                p - network.node[index].avg_energy))
+            p - network.node[index].avg_energy))
     for index, p in s2:
         t.append((energy_min - network.node[index].energy + time_move * network.node[index].avg_energy) / (
-                p - network.node[index].avg_energy))
+            p - network.node[index].avg_energy))
     dead_list = []
     for item in t:
         nb_dead = 0
@@ -256,12 +256,12 @@ def get_charging_time(network=None, q_learning=None, state=None, alpha=0):
         #         nb_dead += 1
         for index, p in s1:
             temp = network.node[index].energy - time_move * network.node[index].avg_energy + (
-                        p - network.node[index].avg_energy) * item
+                p - network.node[index].avg_energy) * item
             if temp < energy_min:
                 nb_dead += 1
         for index, p in s2:
             temp = network.node[index].energy - time_move * network.node[index].avg_energy + (
-                        p - network.node[index].avg_energy) * item
+                p - network.node[index].avg_energy) * item
             if temp < energy_min:
                 nb_dead += 1
         dead_list.append(nb_dead)
