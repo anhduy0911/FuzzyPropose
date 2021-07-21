@@ -113,8 +113,11 @@ class Network:
         t = 0
         while t <= max_time and nb_package > 0:
             t += 1
-            if (t - 1) % 1000 == 0:
-                print(t, self.mc.current, self.node[self.find_min_node()].energy)
+            if (t - 1) % 100 == 0:
+                print(t, self.mc.current,
+                      self.node[self.find_min_node()].energy,
+                      self.node[self.find_most_consume_node()].avg_energy,
+                      len(self.mc.list_request))
             state = self.run_per_second(t, optimizer)
             current_dead = self.count_dead_node()
             current_package = self.count_package()
@@ -159,6 +162,16 @@ class Network:
                 min_energy = node.energy
                 min_id = node.id
         return min_id
+
+    def find_most_consume_node(self):
+        max_energy = 0
+        max_id = -1
+
+        for node in self.node:
+            if node.avg_energy > max_energy:
+                max_energy = node.avg_energy
+                max_id = node.id
+        return max_id
 
     def count_dead_node(self):
         """

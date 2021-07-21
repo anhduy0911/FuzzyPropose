@@ -41,6 +41,9 @@ def reward_function(network, q_learning, state, receive_func=find_receiver):
         min_pe = 1.0
     alpha = Fuzzy.get_output(min_E, len(index_negative), min_pe)
 
+    if alpha > ((0.1 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max):
+        alpha = (0.1 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max
+
     charging_time = get_charging_time(network, q_learning, state, alpha)
     w, nb_target_alive = get_weight(network, network.mc, q_learning, state, charging_time, receive_func)
     p = get_charge_per_sec(network, q_learning, state)
@@ -75,6 +78,20 @@ def action_function(nb_action=225):
     list_action.append(para.depot)
     return list_action
 
+
+def action_function_modify(list_node):
+    """
+    init action
+    :param nb_action:
+    :return:
+    """
+    list_action = []
+    for node in list_node:
+        list_action.append(node.location)
+
+    list_action.append(para.depot)
+    # print(f'list action: {list_action}')
+    return list_action
 
 # def action_function(network):
 #     list_action = []

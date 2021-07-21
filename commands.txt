@@ -1,3 +1,11 @@
-python3 Test.py formal_data_3 q_fuzzy 1 0 1 0.6 0.5 qlearning 500000
-python3 Test.py formal_data_3 inma 1 0 1 0.6 0.5 inma 500000
-python3 Test.py formal_data_3 gsa 1 0 1 0.6 0.5 gsa 500000
+python3 Test.py formal_data_5 q_fuzzy 1 0 1 0.6 0.5 qlearning 500000
+python3 Test.py formal_data_5 inma 1 0 1 0.6 0.5 inma 500000
+python3 Test.py formal_data_5 gsa 1 0 1 0.6 0.5 gsa 500000
+
+python3 Test.py formal_data_5_300 q_fuzzy 1 0 1 0.6 0.5 qlearning 500000
+python3 Test.py formal_data_5_300 inma 1 0 1 0.6 0.5 inma 500000
+python3 Test.py formal_data_5_300 gsa 1 0 1 0.6 0.5 gsa 500000
+
+python3 Test.py formal_data_5_400 q_fuzzy 1 0 1 0.6 0.5 qlearning 500000
+python3 Test.py formal_data_5_400 inma 1 0 1 0.6 0.5 inma 500000
+python3 Test.py formal_data_5_400 gsa 1 0 1 0.6 0.5 gsa 500000

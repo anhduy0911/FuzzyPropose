@@ -12,6 +12,8 @@ import numpy as np
 import csv
 import sys
 
+import Parameter as para
+
 # index = 0
 # random.seed(3)
 # df = pd.read_csv("data/thaydoitileguitin.csv")
@@ -75,18 +77,19 @@ for id_data in range(data_range):
         for i in range(len(node_pos)):
             location = node_pos[i]
             com_ran = df.commRange[index]
-            energy = df.energy[index] / 5
+            energy = df.energy[index] / 20
             energy_max = df.energy[index]
             prob = df.freq[index]
             node = Node(location=location, com_ran=com_ran, energy=energy, energy_max=energy_max, id=i,
-                        energy_thresh=0.1 * energy_max, prob=prob)
+                        energy_thresh=0.02 * energy_max, prob=prob)
             list_node.append(node)
         mc = MobileCharger(energy=df.E_mc[index], capacity=df.E_max[index], e_move=df.e_move[index],
                            e_self_charge=df.e_mc[index], velocity=df.velocity[index])
         target = [int(item) for item in df.target[index].split(',')]
         net = Network(list_node=list_node, mc=mc, target=target)
         # print(len(net.node), len(net.target), max(net.target))
-        q_learning = Q_learning(alpha=learning_rate, gamma=scale_factor)
+        action_list = node_pos + [para.depot]
+        q_learning = Q_learning(alpha=learning_rate, gamma=scale_factor, action_list=action_list)
         inma = Inma()
         gsa = GSA()
         if opt == "qlearning":
