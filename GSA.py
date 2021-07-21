@@ -46,8 +46,8 @@ class GSA:
                     if j == i:
                         continue
                     f_j = self.g(t) * m[i] * m[j] / (
-                            distance.euclidean(population[i]["scheme"], population[j]["scheme"]) + self.epsilon) * (
-                                  population[i]["scheme"] - population[j]["scheme"])
+                        distance.euclidean(population[i]["scheme"], population[j]["scheme"]) + self.epsilon) * (
+                        population[i]["scheme"] - population[j]["scheme"])
                     f_i.append(random.random() * f_j)
                 #  update f_i
                 f_i = np.asarray(f_i)
