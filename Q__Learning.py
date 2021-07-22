@@ -9,12 +9,12 @@ from Q_learning_method import init_function, action_function_modify, q_max_funct
 
 
 class Q_learning:
-    def __init__(self, init_func=init_function, action_list=None, nb_action=225, action_func=action_function_modify, alpha=0.5, gamma=0.5):
+    def __init__(self, init_func=init_function, action_list=None, action_func=action_function_modify, alpha=0.5, gamma=0.5):
         self.alpha = alpha  # learning rate
         self.gamma = gamma  # scale factor
         self.action_list = action_list  # the list of action
-        self.q_table = init_func(nb_action=nb_action)  # q table
-        self.state = nb_action  # the current state of actor
+        self.q_table = init_func(nb_action=len(action_list))  # q table
+        self.state = len(action_list) - 1  # the current state of actor
         self.charging_time = [0.0 for _ in self.action_list]  # the list of charging time at each action
         self.reward = np.asarray([0.0 for _ in self.action_list])  # the reward of each action
         self.reward_max = [0.0 for _ in self.action_list]  # the maximum reward of each action
