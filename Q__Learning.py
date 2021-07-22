@@ -13,7 +13,7 @@ class Q_learning:
         self.alpha = alpha  # learning rate
         self.gamma = gamma  # scale factor
         self.action_list = action_list  # the list of action
-        self.q_table = init_func(nb_action=len(action_list))  # q table
+        self.q_table = init_func(nb_action=(len(action_list) - 1))  # q table
         self.state = len(action_list) - 1  # the current state of actor
         self.charging_time = [0.0 for _ in self.action_list]  # the list of charging time at each action
         self.reward = np.asarray([0.0 for _ in self.action_list])  # the reward of each action

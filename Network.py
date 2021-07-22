@@ -108,16 +108,23 @@ class Network:
         information_log = open(file_name, "w")
         writer = csv.DictWriter(information_log, fieldnames=["time", "nb dead", "nb package"])
         writer.writeheader()
+
+        file_name2 = f'log/{write_file}_fuzzy_log.csv'
+        information_log2 = open(file_name2, "w")
+        writer2 = csv.DictWriter(information_log2, fieldnames=["time", "current mc", "min energy", "most consume", "queue length"])
+        writer2.writeheader()
+
         nb_dead = 0
         nb_package = len(self.target)
         t = 0
         while t <= max_time and nb_package > 0:
             t += 1
             if (t - 1) % 100 == 0:
-                print(t, self.mc.current,
-                      self.node[self.find_min_node()].energy,
-                      self.node[self.find_most_consume_node()].avg_energy,
-                      len(self.mc.list_request))
+                writer2.writerow({"time": t, "current mc": self.mc.current, 
+                                "min energy": self.node[self.find_min_node()].energy, 
+                                "most consume": self.node[self.find_most_consume_node()].avg_energy,
+                                "queue length": len(self.mc.list_request)})
+                
             state = self.run_per_second(t, optimizer)
             current_dead = self.count_dead_node()
             current_package = self.count_package()
