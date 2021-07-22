@@ -285,7 +285,8 @@ def get_charging_time(network=None, q_learning=None, state=None, alpha=0, is_tes
             p - network.node[index].avg_energy))
     for index, p, energy_min_s2 in s2:
         if (network.node[index].energy  - time_move * node.avg_energy > energy_min):
-            t.append(0)
+            t.append((energy_min - network.node[index].energy + time_move * network.node[index].avg_energy) / (
+            p - network.node[index].avg_energy))
         else:
             t.append((energy_min_s2 - network.node[index].energy + time_move * network.node[index].avg_energy) / (
             p - network.node[index].avg_energy))
