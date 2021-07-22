@@ -10,3 +10,4 @@ EFS = 0.00000000001
 EMP = 0.0000000000000013
 prob = 0.1
 E_mc_thresh = 10
+e_max_sensor = 10

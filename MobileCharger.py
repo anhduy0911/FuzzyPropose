@@ -65,7 +65,7 @@ class MobileCharger:
         else:
             self.is_self_charge = False
 
-    def get_next_location(self, network, time_stem, optimizer=None):
+    def get_next_location(self, network, time_stem, optimizer=None, write_file=None):
         """
         get next location of mc each second
         :param network: the network
@@ -73,13 +73,13 @@ class MobileCharger:
         :param optimizer: the optimizer to find next location and time to charge at there
         :return:
         """
-        next_location, charging_time = optimizer.update(network)
+        next_location, charging_time = optimizer.update(network, write_file=write_file, t=time_stem)
         self.start = self.current
         self.end = next_location
         moving_time = distance.euclidean(self.start, self.end) / self.velocity
         self.end_time = time_stem + moving_time + charging_time
 
-    def run(self, network, time_stem, optimizer=None):
+    def run(self, network, time_stem, optimizer=None, write_file=None):
         """
         simulate the action of mc each second
         :param network: the network
@@ -95,7 +95,7 @@ class MobileCharger:
                                  network.node[request["id"]].energy < network.node[request["id"]].energy_thresh]
             if not self.list_request:
                 self.is_active = False
-            self.get_next_location(network=network, time_stem=time_stem, optimizer=optimizer)
+            self.get_next_location(network=network, time_stem=time_stem, optimizer=optimizer, write_file=write_file)
         else:
             if self.is_active:
                 if not self.is_stand:

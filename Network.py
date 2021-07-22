@@ -50,7 +50,7 @@ class Network:
         """
         return communicate_func(self)
 
-    def run_per_second(self, t, optimizer=None):
+    def run_per_second(self, t, optimizer=None, write_file=None):
         """
         simulate network per second
         :param t: current time
@@ -70,7 +70,7 @@ class Network:
                 if index not in request_id and (t - node.check_point[-1]["time"]) > 50:
                     node.set_check_point(t)
         if optimizer:
-            self.mc.run(network=self, time_stem=t, optimizer=optimizer)
+            self.mc.run(network=self, time_stem=t, optimizer=optimizer, write_file=write_file)
         return state
 
     def simulate_lifetime(self, optimizer=None, file_name="log/energy_log.csv"):
@@ -125,7 +125,7 @@ class Network:
                                 "most consume": self.node[self.find_most_consume_node()].avg_energy,
                                 "queue length": len(self.mc.list_request)})
                 
-            state = self.run_per_second(t, optimizer)
+            state = self.run_per_second(t, optimizer, write_file=write_file)
             current_dead = self.count_dead_node()
             current_package = self.count_package()
             if current_dead != nb_dead or current_package != nb_package:

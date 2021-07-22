@@ -77,7 +77,7 @@ for id_data in range(data_range):
         for i in range(len(node_pos)):
             location = node_pos[i]
             com_ran = df.commRange[index]
-            energy = df.energy[index] / 20
+            energy = df.energy[index] / 10
             energy_max = df.energy[index]
             prob = df.freq[index]
             node = Node(location=location, com_ran=com_ran, energy=energy, energy_max=energy_max, id=i,
