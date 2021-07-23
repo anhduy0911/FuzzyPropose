@@ -22,3 +22,16 @@ python3 Test.py tansuatguitin gsa_tansuatgui 5 0 1 0.6 0.5 gsa 500000
 python3 Test.py soluongsensor q_fuzzy_sensor 3 0 1 0.6 0.5 qlearning 500000
 python3 Test.py soluongtarget q_fuzzy_target 5 0 1 0.6 0.5 qlearning 500000
 python3 Test.py tansuatguitin q_fuzzy_tansuatgui 5 0 1 0.6 0.5 qlearning 500000
+
+python3 Test.py formal_data_5 q_fuzzy_gamma4 1 0 1 0.5 0.4 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_gamma5 1 0 1 0.5 0.5 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_gamma6 1 0 1 0.5 0.6 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_gamma7 1 0 1 0.5 0.7 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_gamma8 1 0 1 0.5 0.8 qlearning 500000
+
+python3 Test.py formal_data_5 q_fuzzy_alpha3 1 0 1 0.5 0.4 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_alpha4 1 0 1 0.5 0.5 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_alpha5 1 0 1 0.5 0.6 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_alpha6 1 0 1 0.5 0.7 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_alpha7 1 0 1 0.5 0.8 qlearning 500000
+python3 Test.py formal_data_5 q_fuzzy_alpha8 1 0 1 0.5 0.8 qlearning 500000

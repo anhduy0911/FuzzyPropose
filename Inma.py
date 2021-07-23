@@ -8,7 +8,7 @@ class Inma:
     def __init__(self):
         self.x = 0
 
-    def update(self, network=None):
+    def update(self, network=None, write_file=None):
         """
         update next location of mc
         :param network:

@@ -15,7 +15,7 @@ class GSA:
         self.beta = 20
         self.epsilon = 10 ** -3
 
-    def update(self, network):
+    def update(self, network, write_file=None):
         request_list = network.mc.list_request
         if not len(request_list):
             return network.mc.current, 0
