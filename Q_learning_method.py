@@ -17,6 +17,46 @@ def q_max_function(q_table, state):
     temp = [max(row) if index != state else -float("inf") for index, row in enumerate(q_table)]
     return np.asarray(temp)
 
+def determine_theta_heuristic(network):
+    low_bound = (2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max
+    high_bound = (0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max
+
+    step = (high_bound - low_bound) / 3
+
+    queue_length = len(network.mc.list_request)
+    min_energy = network.node[network.find_min_node()].energy
+
+    idx = 0
+    if queue_length > 0 and queue_length <= 3:
+        if min_energy > 2 * network.node[0].energy_thresh / 3:
+            idx = 3
+        elif min_energy > 1 * network.node[0].energy_thresh / 3 and min_energy <= 2 * network.node[0].energy_thresh / 3:
+            idx = 2
+        elif min_energy > 0 and min_energy <= 1 * network.node[0].energy_thresh / 3:
+            idx = 1
+        else: 
+            idx = 0
+    elif queue_length > 3 and queue_length <= 10:
+        if min_energy > 2 * network.node[0].energy_thresh / 3:
+            idx = 2
+        elif min_energy > 1 * network.node[0].energy_thresh / 3 and min_energy <= 2 * network.node[0].energy_thresh / 3:
+            idx = 1
+        elif min_energy > 0 and min_energy <= 1 * network.node[0].energy_thresh / 3:
+            idx = 0
+        else: 
+            idx = 0
+    elif queue_length > 10:
+        if min_energy > 2 * network.node[0].energy_thresh / 3:
+            idx = 1
+        elif min_energy > 1 * network.node[0].energy_thresh / 3 and min_energy <= 2 * network.node[0].energy_thresh / 3:
+            idx = 0
+        elif min_energy > 0 and min_energy <= 1 * network.node[0].energy_thresh / 3:
+            idx = 0
+        else: 
+            idx = 0
+
+    theta = low_bound + idx * step
+    return theta
 
 def reward_function(network, q_learning, state, receive_func=find_receiver):
     """
@@ -39,13 +79,15 @@ def reward_function(network, q_learning, state, receive_func=find_receiver):
     else:
         min_E = min([node.energy for node in network.node])
         min_pe = 1.0
-    alpha = Fuzzy_Fix.get_output(min_E, len(index_negative), min_pe)
+    # alpha = Fuzzy_Fix.get_output(min_E, len(index_negative), min_pe)
+    alpha = determine_theta_heuristic(network)
 
-    if alpha > ((0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max):
-        # print(f'energy max: {network.node[0].energy_max}, energy thres: {network.node[0].energy_thresh}')
-        alpha = (0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max
-    elif alpha < ((2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max):
-        alpha = (2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max
+    print(f'THETA: {alpha}')
+    # if alpha > ((0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max):
+    #     # print(f'energy max: {network.node[0].energy_max}, energy thres: {network.node[0].energy_thresh}')
+    #     alpha = (0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max
+    # elif alpha < ((2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max):
+    #     alpha = (2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max
 
     charging_time = get_charging_time(network, q_learning, state, alpha)
     w, nb_target_alive = get_weight(network, network.mc, q_learning, state, charging_time, receive_func)
@@ -311,10 +353,10 @@ def get_charging_time(network=None, q_learning=None, state=None, alpha=0, is_tes
             temp = network.node[index].energy - time_move * network.node[index].avg_energy + (
                 p - network.node[index].avg_energy) * item
             if (network.node[index].energy  - time_move * node.avg_energy > energy_min):
-                if temp < energy_min:
+                if temp <= energy_min:
                     nb_dead += 1
             else:
-                if temp < energy_min_s2:
+                if temp <= energy_min_s2:
                     nb_dead += 1
         dead_list.append(nb_dead)
     

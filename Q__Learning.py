@@ -101,7 +101,7 @@ class Q_learning:
             self.charging_time[index] = temp[3]
             if temp[3] != 0:
                 choosing_ind.append(index)
-                print(f'choosing index: {choosing_ind}, time: {temp[3]}')
+                # print(f'choosing index: {choosing_ind}, time: {temp[3]}')
         first = first / np.sum(first)
         second = second / np.sum(second)
         third = third / np.sum(third)
