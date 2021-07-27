@@ -101,7 +101,7 @@ for id_data in range(data_range):
         elif opt == "none":
             optimizer = None
         file_name = "log/q_learning_" + str(index) + ".csv"
-        temp = net.simulate(optimizer=optimizer, file_name=file_name, write_file=write_file, max_time=max_time)
+        temp = net.simulate(optimizer=optimizer, file_name=file_name, write_file=write_file + f'{index}_{nb_run}', max_time=max_time)
         life_time.append(temp)
         result.writerow({"nb run": nb_run, "lifetime": temp})
         print("done run = ", nb_run)
