@@ -80,15 +80,15 @@ def reward_function(network, q_learning, state, receive_func=find_receiver):
         min_E = min([node.energy for node in network.node])
         min_pe = 1.0
     # alpha = Fuzzy_Fix.get_output(min_E, len(index_negative), min_pe)
-    alpha = determine_theta_heuristic(network)
+    # alpha = determine_theta_heuristic(network)
 
-    print(f'THETA: {alpha}')
+    # print(f'THETA: {alpha}')
     # if alpha > ((0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max):
     #     # print(f'energy max: {network.node[0].energy_max}, energy thres: {network.node[0].energy_thresh}')
     #     alpha = (0.2 * network.node[0].energy_max - network.node[0].energy_thresh) / network.node[0].energy_max
     # elif alpha < ((2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max):
     #     alpha = (2 * network.node[0].energy_thresh - network.node[0].energy_thresh) / network.node[0].energy_max
-
+    alpha = 0.4
     charging_time = get_charging_time(network, q_learning, state, alpha)
     w, nb_target_alive = get_weight(network, network.mc, q_learning, state, charging_time, receive_func)
     p = get_charge_per_sec(network, q_learning, state)

@@ -11,17 +11,34 @@ python3 Test.py formal_data_5_400 inma400 1 0 1 0.6 0.5 inma 500000
 python3 Test.py formal_data_5_400 gsa400 1 0 1 0.6 0.5 gsa 500000
 
 FINAL EXPERIMENT
-python3 Test.py soluongsensor inma_sensor 3 0 1 0.6 0.5 inma 500000
+python3 Test.py soluongsensor inma_sensor0 1 0 1 0.4 0.5 inma 500000
+python3 Test.py soluongsensor1 inma_sensor1 1 0 1 0.4 0.5 inma 500000
+python3 Test.py soluongsensor2 inma_sensor2 1 0 1 0.4 0.5 inma 500000
+
 python3 Test.py soluongtarget inma_target 5 0 1 0.6 0.5 inma 500000
+
 python3 Test.py tansuatguitin inma_tansuatgui 5 0 1 0.6 0.5 inma 500000
 
 python3 Test.py soluongsensor gsa_sensor 3 0 1 0.6 0.5 gsa 500000
 python3 Test.py soluongtarget gsa_target 5 0 1 0.6 0.5 gsa 500000
 python3 Test.py tansuatguitin gsa_tansuatgui 5 0 1 0.6 0.5 gsa 500000
 
-python3 Test.py soluongsensor q_fuzzy_sensor 3 0 1 0.4 0.5 qlearning 500000
-python3 Test.py soluongtarget q_fuzzy_target 5 0 1 0.4 0.5 qlearning 500000
-python3 Test.py tansuatguitin q_fuzzy_tansuatgui 5 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongsensor q_fuzzy_sensor0 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongsensor1 q_fuzzy_sensor1 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongsensor2 q_fuzzy_sensor2 1 0 1 0.4 0.5 qlearning 500000
+
+python3 Test.py soluongtarget q_fuzzy_target0 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongtarget1 q_fuzzy_target1 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongtarget2 q_fuzzy_target2 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongtarget3 q_fuzzy_target3 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py soluongtarget4 q_fuzzy_target4 1 0 1 0.4 0.5 qlearning 500000
+
+python3 Test.py tansuatguitin q_fuzzy_tansuatgui0 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py tansuatguitin1 q_fuzzy_tansuatgui1 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py tansuatguitin2 q_fuzzy_tansuatgui2 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py tansuatguitin3 q_fuzzy_tansuatgui3 1 0 1 0.4 0.5 qlearning 500000
+python3 Test.py tansuatguitin4 q_fuzzy_tansuatgui4 1 0 1 0.4 0.5 qlearning 500000
+
 
 python3 Test.py formal_data_5_300 q_fuzzy_gamma4 1 0 1 0.5 0.4 qlearning 500000
 python3 Test.py formal_data_5_300 q_fuzzy_gamma5 1 0 1 0.5 0.5 qlearning 500000
